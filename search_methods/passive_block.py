@@ -15,7 +15,7 @@ class PassiveBlockSearch(SearchMethod):
             x2i_1 = [x - delta for x in x2i]
             points = []
             for x_2i, x_2i1 in zip(x2i, x2i_1):
-                points.append(x2i_1)
+                points.append(x_2i1)
                 points.append(x_2i)
         else:  # нечетное
             step = (b - a) / (data.n + 1)

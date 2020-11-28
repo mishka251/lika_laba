@@ -15,7 +15,7 @@ class TangentMethod(SearchMethod):
         c = ((b * z2 - a * z1) - (y2 - y1)) / (z2 - z1)
         y = data.function(c)
 
-        for _ in range(data.n):
+        for _ in range(data.n-3):
 
             z = data.df_dx(c)
 

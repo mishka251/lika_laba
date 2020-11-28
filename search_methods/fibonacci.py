@@ -39,8 +39,10 @@ class Fibonachy(SearchMethod):
         if y1 < y2:
             x = x1
             y = y1
+           # b=x2
         else:
             x = x2
             y = y2
+            #a=x1
 
-        return CalculationResult(self.method_name, (x1, x2), x, y, x2 - x1)
+        return CalculationResult(self.method_name, (a, b), x, y, b - a)
