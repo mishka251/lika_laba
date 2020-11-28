@@ -2,7 +2,7 @@ from math import exp
 from dataclasses import dataclass
 from typing import Tuple, Callable, List
 from abc import ABC
-
+import os
 
 @dataclass()
 class InputData:
@@ -13,6 +13,10 @@ class InputData:
     df_dx: Callable[[float], float] = None
     str_function: str = None
 
+    def __str__(self):
+        return f'Вариант {self.variant}'+os.linesep+f'Функция - {self.str_function}, интервал {self.interval}, N= {self.n}'
+
+
 
 @dataclass()
 class CalculationResult:
@@ -22,6 +26,8 @@ class CalculationResult:
     min_value: float
     interval_length: float
 
+    def __str__(self):
+        return f'{self.method_name}{os.linesep}x={self.min_point} y={self.min_value} интервал={self.interval}, длина интервала {self.interval_length}'
 
 class SearchMethod(ABC):
     method_name: str
@@ -237,7 +243,7 @@ class TangentMethod(SearchMethod):
 
 class ParabolMethod(SearchMethod):
     method_name = 'Метод парабол'
-
+    #TODO fix
     def __call__(self, data: InputData) -> CalculationResult:
         (a, b) = data.interval
 
@@ -303,6 +309,8 @@ n = 23
 
 inputData = InputData(2, f, n, (a, b), df_dx)
 print(inputData)
-methods = [PassiveBlockSearch(), BlockSearch(), BinarySearch(), Dihotomy(), GoldenFraction(), Fibonachy(), TangentMethod(),ParabolMethod()]
+print()
+methods = [PassiveBlockSearch(), BlockSearch(), BinarySearch(), Dihotomy(), GoldenFraction(), Fibonachy(), TangentMethod()]
 for method in methods:
     print(method(inputData))
+    print()
