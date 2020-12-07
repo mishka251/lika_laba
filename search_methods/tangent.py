@@ -14,13 +14,13 @@ class TangentMethod(SearchMethod):
         z2 = data.df_dx(b)
         c = ((b * z2 - a * z1) - (y2 - y1)) / (z2 - z1)
         y = data.function(c)
-
-        for _ in range(data.n-3):
+        iters = 3
+        while b-a>2*data.eps:
 
             z = data.df_dx(c)
 
             if z == 0:
-                return CalculationResult(self.method_name, (c, c), c, y, 0)
+                return CalculationResult(self.method_name, (c, c), c, y, 0, iters)
 
             if z < 0:
                 a = c
@@ -33,5 +33,6 @@ class TangentMethod(SearchMethod):
 
             c = ((b * z2 - a * z1) - (y2 - y1)) / (z2 - z1)
             y = data.function(c)
+            iters+=1
 
-        return CalculationResult(self.method_name, (a, b), c, y, b - a)
+        return CalculationResult(self.method_name, (a, b), c, y, b - a, iters)

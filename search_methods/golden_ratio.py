@@ -15,7 +15,9 @@ class GoldenFraction(SearchMethod):
         y1 = data.function(x1)
         y2 = data.function(x2)
 
-        for _ in range(data.n - 2):
+        iters = 2
+
+        while b-a>data.eps:
             if y1 <= y2:
                 b = x2
                 x2 = x1
@@ -28,7 +30,7 @@ class GoldenFraction(SearchMethod):
                 y1 = y2
                 x2 = a + b - x1
                 y2 = data.function(x2)
-
+            iters+=1
         if y1 < y2:
             x = x1
             y = y1
@@ -37,4 +39,4 @@ class GoldenFraction(SearchMethod):
             x = x2
             y = y2
             a = x1
-        return CalculationResult(self.method_name, (a, b), x, y, b - a)
+        return CalculationResult(self.method_name, (a, b), x, y, b - a, iters)

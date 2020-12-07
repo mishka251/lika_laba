@@ -14,8 +14,9 @@ class ParabolMethod(SearchMethod):
         y_a = data.function(a)
         y_b = data.function(b)
         y_c = data.function(c)
+        iters = 3
 
-        for _ in range(data.n):
+        while b-a>data.eps:
 
             assert y_c < y_a and y_c < y_b
 
@@ -26,6 +27,7 @@ class ParabolMethod(SearchMethod):
 
             x = t if t != c else (a + c) / 2
             y = data.function(x)
+            iters+=1
 
             if x < c:
                 if y < y_c:
@@ -40,6 +42,7 @@ class ParabolMethod(SearchMethod):
                     y_a = y
                     y_b = y_c
                     y_c = data.function(c)
+                    iters+=1
 
                 else:
                     a = x
@@ -57,6 +60,7 @@ class ParabolMethod(SearchMethod):
                     y_a = y_c
                     y_b = y
                     y_c = data.function(c)
+                    iters+=1
 
                 else:
                     b = x
@@ -65,4 +69,4 @@ class ParabolMethod(SearchMethod):
             if abs(y_a - y_c) < 1e-10 and abs(y_b - y_c) < 1e-10:  # eps
                 break
 
-        return CalculationResult(self.method_name, (a, b), x, y, b - a)
+        return CalculationResult(self.method_name, (a, b), x, y, b - a,iters)

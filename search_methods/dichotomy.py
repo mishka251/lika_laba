@@ -9,17 +9,16 @@ class Dihotomy(SearchMethod):
         (a, b) = data.interval
         x = (b + a) / 2
 
-        eps = ((b - a) / data.n)
-        delta = eps / 50
+        delta = data.eps / 50
+        iters = 0
 
-        k = data.n//2
-
-        for _ in range(k):
+        while b-a > 2*data.eps:
             x_1 = x - delta
             x_2 = x + delta
 
             y_1 = data.function(x_1)
             y_2 = data.function(x_2)
+            iters+=2
 
             if y_1 <= y_2:
                 b = x_2
@@ -28,4 +27,4 @@ class Dihotomy(SearchMethod):
 
             x = (b + a) / 2
 
-        return CalculationResult(self.method_name, (a, b), x, data.function(x), (b - a) / 2)
+        return CalculationResult(self.method_name, (a, b), x, data.function(x), (b - a) / 2, iters)

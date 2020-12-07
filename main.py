@@ -1,12 +1,20 @@
 
 from search_methods import *
-from variants import lika_data, test
+from variants import variant10, test
 
-print(lika_data)
+print(variant10)
 print()
-methods = [PassiveBlockSearch(), BlockSearch(), BinarySearch(), Dihotomy(), GoldenFraction(), Fibonachy(),
-           TangentMethod(), ParabolMethod()]
+methods = [
+    # PassiveBlockSearch(),
+    # BlockSearch(),
+     BinarySearch(),
+    Dihotomy(),
+    GoldenFraction(),
+    # Fibonachy(),
+    #TangentMethod(),
+    ParabolMethod()
+]
 
 for method in methods:
-    print(method(lika_data))
+    print(method(variant10))
     print()
